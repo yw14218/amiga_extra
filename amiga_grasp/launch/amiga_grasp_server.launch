@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="grasp_type" value="object_detection_grasp" doc="object_detection_grasp or deep grasp"/>
+ 
+  <!--arg name="grasp_target" value="teddy bear" doc="object to grasp if detectable"/-->
+  <arg name="grasp_target" value="teddy bear" doc="object to grasp if detectable"/>
+  <arg name="approaching_pose" value="top" doc="choose from top, front" />
+  <arg name="grasp_link_name" default="grasp_target_link" doc="name of the proposed grasp pose link to visualise in rviz" />
+  
+  <group if="$(eval grasp_type == 'object_detection_grasp')">
+    <include file="$(find amiga_grasp)/launch/grasp_generator/obj_det_grasp.launch">
+      <arg name="grasp_target" default="$(arg grasp_target)" />
+      <arg name="approaching_pose" value="$(arg approaching_pose)" />
+      <arg name="grasp_target_link" value="$(arg grasp_link_name)" />
+    </include>
+  </group>
+
+  <group if="$(eval grasp_type == 'deep_grasp')">
+    <include file="$(find amiga_grasp)/launch/deep_grasp.launch" />
+  </group>
+  
+</launch>

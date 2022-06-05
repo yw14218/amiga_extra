@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="grasp_target" default="teddy bear" doc="object to grasp if detectable"/>
+  <arg name="approaching_pose" default="top" doc="choose from top, front" />
+  <arg name="grasp_target_link" default="grasp_target_link" doc="name of the proposed grasp pose link to visualise in rviz" />
+  
+  <node name="obj_det_grasp_generator" pkg="amiga_grasp" type="obj_det_grasp_generator.py" output="screen">
+    <param name="target_object" value="$(arg grasp_target)" />
+    <param name="target_link" value="$(arg grasp_target_link)" />
+    <param name="target_pose" value="$(arg approaching_pose)" />
+  </node>
+
+</launch>

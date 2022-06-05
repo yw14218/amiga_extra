@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="enable_simulation" value="true" />
+  <arg name="allow_replanning" value="false" />
+  <arg name="goal_position_tolerance" value="0.005" />
+  <arg name="goal_orientation_tolerance" value="0.005" />
+  <arg name="pose_reference_frame" value="base_link" />
+  
+  <node name="motion_planning_server" pkg="amiga_manip" type="manipulation_server.py" output="screen">
+    <param name="simulation" value="$(arg enable_simulation)" />
+    <param name="goal_position_tolerance" value="$(arg goal_position_tolerance)" />
+    <param name="goal_orientation_tolerance" value="$(arg goal_orientation_tolerance)" />
+    <param name="allow_replanning" value="$(arg allow_replanning)" />
+    <param name="pose_reference_frame" value="$(arg pose_reference_frame)" />
+  </node>
+
+</launch>
