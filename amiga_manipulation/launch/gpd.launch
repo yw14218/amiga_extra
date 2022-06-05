@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- pc collect server -->
+  <include file="$(find amiga_manipulation)/launch/collect_pc.launch"/>
+  
+  <arg name="load_cloud" default="true" doc="load point cloud from file"/>
+  <arg name="action_name" value="generate_grasps" doc="action name space"/>
+  <arg name="frame_id" value="amiga_arm_tool0" doc="frame of the grasps sent to MTC"/>
+  <!--arg unless="$(arg load_cloud)" name="point_cloud_topic" value="/filtered_cloud" doc="point cloud topic name"/-->
+
+  <!-- file paths -->
+  <arg if="$(arg load_cloud)" name="path_to_pcd_file" value="/home/yilong/git_ws/src/ur10e_robotiq/amiga_manipulation/data/tmp/tmp_processed.pcd" doc="path to point cloud file"/>
+  <arg name="path_to_gpd_config" value="$(find amiga_manipulation)/config/gpd_config.yaml" doc="path to GPD config and gripper params file"/>
+
+  <!-- Grasp detection using GPD -->
+  <node name="grasp_cloud_detection" pkg="moveit_task_constructor_gpd" type="grasp_cloud_detection" output="screen">
+    <param if="$(arg load_cloud)" name="path_to_pcd_file" value="$(arg path_to_pcd_file)"/>
+    <param unless="$(arg load_cloud)" name="point_cloud_topic" value="$(arg point_cloud_topic)"/>
+    <rosparam command="load" file="$(find amiga_manipulation)/config/camera.yaml" />
+    <rosparam param="view_point">[0.0, 0.0, 0.0]</rosparam>
+    <param name="load_cloud" value="$(arg load_cloud)"/>
+    <param name="action_name" value="$(arg action_name)"/>
+    <param name="frame_id" value="$(arg frame_id)"/>
+    <param name="path_to_gpd_config" value="$(arg path_to_gpd_config)"/>
+  </node>
+</launch>
