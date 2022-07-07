@@ -1,0 +1,5 @@
+geometry_msgs/Pose target_pose
+string frame
+float64 distance
+string gripper_type
+---

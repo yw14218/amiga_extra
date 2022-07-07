@@ -1,0 +1,4 @@
+geometry_msgs/Pose[] vir_poses
+geometry_msgs/Point translation_wrt_eef
+---
+geometry_msgs/Pose[] eef_poses

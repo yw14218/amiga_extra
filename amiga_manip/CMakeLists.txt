@@ -49,7 +49,7 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
+#  add_message_files(
 #   FILES
 #   Message1.msg
 #   Message2.msg
@@ -61,6 +61,14 @@ find_package(catkin REQUIRED COMPONENTS
    PlanToPose.srv
    PlanCartesian.srv
    PlanJointGoal.srv
+   GetPose.srv
+   TraverseWaypoints.srv
+   PublishTF.srv
+   ViewAdjust.srv
+   AddCollision.srv
+   VirTransPose.srv
+   VirTransTraj.srv
+   GraspExecutor.srv
  )
 
 ## Generate actions in the 'action' folder
@@ -74,6 +82,7 @@ find_package(catkin REQUIRED COMPONENTS
  generate_messages(
    DEPENDENCIES
    std_msgs
+   geometry_msgs
  )
 
 ################################################
