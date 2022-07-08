@@ -112,10 +112,10 @@ if __name__ == "__main__":
     depth_cvmat = cv2.cvtColor(depth_cvmat, cv2.COLOR_BGR2GRAY) # 8UC1
     depth_cvmat = depth_cvmat.astype(np.float32) * 1.0/255.0 # 32FC1
 
-    with open('/home/yilong/depth.npy', 'rb') as f:
+    with open('/home/yilong/git_ws/src/ur10e_robotiq/amiga_manipulation/data/tmp/depth.npy', 'rb') as f:
         depth_cvmat = np.load(f)
         depth_cvmat = depth_cvmat[..., None]
-    with open('/home/yilong/rgb.npy', 'rb') as f:
+    with open('/home/yilong/git_ws/src/ur10e_robotiq/amiga_manipulation/data/tmp/rgb.npy', 'rb') as f:
         color_cvmat = np.load(f)
         color_cvmat = color_cvmat[:,:,:3]
 

@@ -43,16 +43,27 @@ class VirtualGraspffector():
 
     def start(self):
 
-        q = quaternion_from_euler(-5*math.pi/4, -math.pi/2, -3*math.pi/2)
-        pose_frame = [0.4, 0.4, 0.25, q[0], q[1], q[2], q[3]]
-        self.static_tf_broadcast('amiga_arm_tool0', "gpd_grasp_frame", pose_frame)
+        # q = quaternion_from_euler(-5*math.pi/4, -math.pi/2, -3*math.pi/2)
+        # pose_frame = [0.4, 0.4, 0.25, q[0], q[1], q[2], q[3]]
+        # self.static_tf_broadcast('amiga_arm_tool0', "gpd_grasp_frame", pose_frame)
 
-        pose_in_list = [0, 0, 0.2, 0, 0, 0, 1]
-        self.static_tf_broadcast("amiga_arm_tool0", "virtual_effector", pose_in_list)
+        # pose_in_list = [0, 0, 0.2, 0, 0, 0, 1]
+        # self.static_tf_broadcast("amiga_arm_tool0", "virtual_effector", pose_in_list)
+        
+        # pose_in_list_vs = [-0.07, 0.07, 0.26, 0, 0, 0, 1]
+        # self.static_tf_broadcast("amiga_arm_tool0", "virtual_scissor", pose_in_list_vs)
+
+
+        q = quaternion_from_euler(math.pi, -math.pi/2, math.pi/4)
+        pose_frame = [0.4, 0.4, 0.25, q[0], q[1], q[2], q[3]]
+        self.static_tf_broadcast('amiga_arm_tool0', "dex_net_frame", pose_frame)
+
+
         # listener = tf.TransformListener()
         # listener.waitForTransform("amiga_arm_tool0", "amiga_gripper_palm", rospy.Time(), rospy.Duration(4.0))
         # translation, rotation = listener.lookupTransform("amiga_arm_tool0", "amiga_gripper_palm", rospy.Time(0))
-        # print(translation)
+        # print(translation)     # pose_frame = [0.4, 0.4, 0.25, q[0], q[1], q[2], q[3]]
+        # self.static_tf_broadcast('amiga_arm_tool0', "gpd_grasp_frame", pose_frame)
         # print(rotation)
         # pose_in_list = [0.55, 0, -0.15, q[0], q[1], q[2], q[3]]
         # self.static_tf_broadcast("base_link", "dummy_linl", pose_in_list)
