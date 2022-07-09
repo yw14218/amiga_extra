@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="initial_joint_positions_camera_calibration" doc="Initial joint configuration of the robot"
+       value=" -J amiga_arm_elbow_joint 2.024504457351423 -J amiga_arm_shoulder_lift_joint -0.5242872709555622 
+       -J amiga_arm_shoulder_pan_joint 1.570958958996222 -J amiga_arm_wrist_1_joint -3.0701408977004645
+       -J amiga_arm_wrist_2_joint -1.5699516519377346 -J amiga_arm_wrist_3_joint -2.5157214384577493" />
+  
+  <arg name="world_camera_calibration" value="$(find amiga_sim)/worlds/calibration_grid.world" />
+  
+  <include file="$(find amiga_sim)/launch/gazebo_basic.launch">
+  	<arg name="initial_joint_positions" value="$(arg initial_joint_positions_camera_calibration)" />
+  	<arg name="world" value="$(arg world_camera_calibration)" />
+  </include>
+  
+</launch>

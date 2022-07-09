@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="gui" default="true" doc="Starts gazebo gui" />
+  <arg name="world" default="$(find amiga_manipulation)/worlds/clutter.world" />
+  <arg name="initial_joint_positions" doc="Initial joint configuration of the robot"
+       default=" -J amiga_arm_elbow_joint 2.6208 -J amiga_arm_shoulder_lift_joint -1.5069 
+       -J amiga_arm_shoulder_pan_joint 0 -J amiga_arm_wrist_1_joint -1.1455 
+       -J amiga_arm_wrist_2_joint 1.5068 -J amiga_arm_wrist_3_joint -0.78" />
+  
+  <!-- Load robot description & publish joints -->
+  <include file="$(find amiga_description)/launch/amiga.launch">
+    <arg name="rviz" value="false" />
+    <arg name="pub_joints" value="false" />
+    <arg name="gazebo" value="true" />
+  </include>
+
+  <!-- Create Gazebo world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" default="$(arg world)" />
+    <arg name="paused" value="true" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="verbose" value="true" />
+  </include>
+
+  <!-- Spawn robot -->
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param /robot_description 
+        -model robot
+        -x 0.00
+        -y 0.00
+        -z 0.00
+        -unpause
+        $(arg initial_joint_positions)" />
+
+  <!-- Fake calibration topic for UR10e -->
+  <node pkg="rostopic" type="rostopic" name="fake_joint_calibration"
+        args="pub /calibrated std_msgs/Bool true" />
+
+  <!-- Load joint state publisher controller for Gazebo -->
+  <rosparam file="$(find amiga_moveit_config)/config/gazebo_controllers.yaml" command="load"/>
+  <node name="joint_state_controller_spawner" pkg="controller_manager" type="controller_manager" 
+        respawn="false" args="spawn joint_state_controller"/>
+
+  <!-- Load UR10e joint controller to follow MoveIt trajectory -->
+  <rosparam file="$(find amiga_moveit_config)/config/ros_controllers.yaml" command="load" />
+  <node name="arm_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" args="arm_no_gripper_controller " output="screen"/>
+  <node name="gripper_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" args="gripper " output="screen"/>
+
+  <!-- Load ARNIE base controller -->
+  <rosparam file="$(find amiga_moveit_config)/config/arnie_diff_drive_controller.yaml" command="load" />
+  <node name="arnie_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" args="arnie_base_controller "  output="screen"/>
+
+  <!-- Run MoveIt -->
+  <include file="$(find amiga_moveit_config)/launch/move_group.launch">
+    <arg name="allow_trajectory_execution" value="true" />
+    <arg name="moveit_controller_manager" value="ros_control" />
+    <arg name="load_robot_description" value="false" />
+  </include>
+  
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amiga_manipulation)/config/mtc.rviz" />
+
+</launch>

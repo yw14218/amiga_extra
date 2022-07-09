@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!-- 
+
+Author: Nico Lingg
+
+ -->
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:macro name="gripper_camera_mount" params="prefix">
+    <link name="${prefix}base_link">
+      <inertial>
+        <origin xyz="4.5207E-19 0.035453 -6.5774E-05" rpy="0 0 0" />
+        <mass value="0.11943" />
+        <inertia ixx="0.00015472" ixy="5.0596E-20" ixz="1.5989E-20" iyy="0.00010796" iyz="6.9683E-07" izz="0.00024696" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://amiga_description/robots/meshes/base_link.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.25098 0.25098 0.25098 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://amiga_description/robots/meshes/base_link.STL" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+</robot>

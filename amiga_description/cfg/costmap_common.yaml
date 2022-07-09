@@ -1,0 +1,41 @@
+
+# 2D Costmap parameters 
+# http://www.ros.org/wiki/costmap_2d
+
+### Coordinate frame and tf parameters ###
+global_frame:               map
+robot_base_frame:           base_link
+transform_tolerance:        0.5 # 0.2
+
+### Rate parameters ###
+update_frequency:           2
+publish_frequency:          2 
+max_obstacle_height:        0.6 # 2.0
+obstacle_range:             8.0
+raytrace_range:             8.0
+cost_scaling_factor:        10.0
+
+### Robot description parameters ###
+inflation_radius:           0.35  # 0.55
+
+# ---pioneer AT footprint (Meters):---
+footprint: [ [0.27, 0.23], [0.27, -0.23], [-0.27, -0.23], [-0.27, 0.23] ]
+
+# The following parameter is overwritten if the "footprint" parameter is set
+robot_radius:               0.30
+
+### Sensor management parameters ###
+observation_sources: laserscan
+laserscan: { 
+  topic:                    rrbot/laser/scan, 
+  sensor_frame:             base_link, 
+  observation_persistence:  5.0,
+  expected_update_rate:     0.83,
+  data_type:                LaserScan, 
+  clearing:                 true, 
+  marking:                  true, 
+  max_obstacle_height:      0.6,
+  min_obstacle_height:      0.0,
+  obstacle_range:           8.0,
+  raytrace_range:           8.0
+}

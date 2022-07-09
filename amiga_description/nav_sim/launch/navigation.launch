@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+	<node pkg="tf2_ros" type="static_transform_publisher" name="virtual_joint_publisher" args="0 0 0 0 0 0 odom dummy_link"/>
+	<node pkg="move_base" type="move_base" name="amiga_move_base">
+		<rosparam file="$(find amiga_description)/cfg/move_base.yaml" command="load"/>
+		<rosparam file="$(find amiga_description)/cfg/costmap_common.yaml" command="load" ns="global_costmap" />
+		<rosparam file="$(find amiga_description)/cfg/costmap_common.yaml" command="load" ns="local_costmap" />
+		<rosparam file="$(find amiga_description)/cfg/costmap_global.yaml" command="load"  />
+		<rosparam file="$(find amiga_description)/cfg/costmap_local.yaml" command="load"/>
+		
+		<remap from="cmd_vel" to="/arnie_base_controller/cmd_vel"  />
+	</node>
+	
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find amiga_description)/cfg/nav.rviz" />
+
+</launch>

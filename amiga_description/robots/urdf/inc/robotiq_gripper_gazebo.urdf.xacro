@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <!-- Authors: Nico Lingg & Cedric Goubard -->
+
+    <!--
+        This file Gazebo-related elements for the 3 fingers robotiq gripper.
+        DO NOT USE IT BY ITSELF; it is meant to be imported in amiga.urdf.xacro
+     -->
+
+    <xacro:macro name="robotiq_gripper_gazebo">
+
+        <transmission name="trans_amiga_gripper_finger_1_joint_1">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="amiga_gripper_finger_1_joint_1">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="amiga_gripper_finger_1_joint_1_motor">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+        <transmission name="trans_amiga_gripper_finger_1_joint_2">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="amiga_gripper_finger_1_joint_2">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="amiga_gripper_finger_1_joint_2_motor">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+        <transmission name="trans_amiga_gripper_finger_1_joint_3">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="amiga_gripper_finger_1_joint_3">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="amiga_gripper_finger_1_joint_3_motor">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+        <transmission name="trans_amiga_gripper_finger_2_joint_1">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="amiga_gripper_finger_2_joint_1">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="amiga_gripper_finger_2_joint_1_motor">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+        <transmission name="trans_amiga_gripper_finger_2_joint_2">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="amiga_gripper_finger_2_joint_2">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="amiga_gripper_finger_2_joint_2_motor">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+        <transmission name="trans_amiga_gripper_finger_2_joint_3">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="amiga_gripper_finger_2_joint_3">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="amiga_gripper_finger_2_joint_3_motor">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+        <transmission name="trans_amiga_gripper_finger_middle_joint_1">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="amiga_gripper_finger_middle_joint_1">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="amiga_gripper_finger_middle_joint_1_motor">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+        <transmission name="trans_amiga_gripper_finger_middle_joint_2">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="amiga_gripper_finger_middle_joint_2">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="amiga_gripper_finger_middle_joint_2_motor">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+        <transmission name="trans_amiga_gripper_finger_middle_joint_3">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="amiga_gripper_finger_middle_joint_3">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="amiga_gripper_finger_middle_joint_3_motor">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+        <transmission name="trans_amiga_gripper_palm_finger_1_joint">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="amiga_gripper_palm_finger_1_joint">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="amiga_gripper_palm_finger_1_joint_motor">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+        <transmission name="trans_amiga_gripper_palm_finger_2_joint">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="amiga_gripper_palm_finger_2_joint">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="amiga_gripper_palm_finger_2_joint_motor">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+
+
+        <gazebo reference="amiga_gripper_palm_finger_1_link_0">
+            <self_collide>0</self_collide>
+        </gazebo>
+        <gazebo reference="amiga_gripper_palm_finger_2_link_0">
+            <self_collide>0</self_collide>
+        </gazebo>
+        <gazebo reference="amiga_gripper_palm_finger_middle_link_1">
+            <self_collide>0</self_collide>
+        </gazebo>
+
+    </xacro:macro>
+</robot>

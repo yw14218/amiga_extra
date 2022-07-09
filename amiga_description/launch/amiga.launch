@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="pub_joints" default="true" />
+  <arg name="gazebo" default="false" />
+  <arg name="rviz" default="true" />
+  <arg name="model" default="$(find amiga_description)/robots/urdf/amiga.urdf.xacro" />
+
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model) gazebo:=$(arg gazebo)" />
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" if="$(arg pub_joints)">
+    <!-- <remap from="robot_description" to="robot_description_amiga" /> -->
+  </node>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+    <!-- <remap from="robot_description" to="robot_description_amiga" /> -->
+  </node>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find amiga_description)/cfg/amiga.rviz" if="$(eval arg('rviz'))"></node>
+
+</launch>

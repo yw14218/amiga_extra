@@ -1,0 +1,18 @@
+parameters:
+  eye_on_hand: true
+  freehand_robot_movement: false
+  move_group: arm_no_gripper
+  move_group_namespace: /
+  namespace: /easy_handeye_eye_on_hand/
+  robot_base_frame: base_link
+  robot_effector_frame: amiga_arm_tool0
+  tracking_base_frame: l515_grip_color_optical_frame
+  tracking_marker_frame: camera_marker
+transformation:
+  qw: 0.6376966546128812
+  qx: 0.003492625983694214
+  qy: 0.23985577707533978
+  qz: 0.7319835957607669
+  x: -0.0296622894061786
+  y: -0.1906391276860236
+  z: -0.257568108415842

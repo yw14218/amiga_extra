@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+
+  <group  ns="amiga">
+	  <!-- http://www.ros.org/wiki/map_server -->
+	  <!-- Use demo_navigation_gmapping.launch to make a map and save it to disk -->
+	  <node name="map_server" pkg="map_server" type="map_server" args="$(env HOME)/sim_map.yaml">  
+  	  <param name="frame_id" type="str" value="map"  />
+	  </node>
+
+	  <node pkg="amcl" type="amcl" name="amcl" >
+	    <rosparam file="$(find amiga_description)/cfg/amcl.yaml" command="load"  />
+	    <remap from="scan" to="/rrbot/laser/scan" />
+	  </node>
+
+	</group>
+	
+</launch>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="marker_size" doc="Size of the ArUco marker used, in meters" value="0.2"/>
+    <arg name="marker_id" doc="The ID of the ArUco marker used" value="582"/>
+    <arg name="robot_ip" doc="The IP address of the UR10e robot" />
+    <arg name="world_camera_calibration" value="$(find amiga_sim)/worlds/aruco_table.world" />
+    <arg name="namespace_prefix" default="easy_handeye" />
+  
+    <include file="$(find amiga_sim)/launch/gazebo_basic.launch">
+  	<arg name="world" value="$(arg world_camera_calibration)" />
+    </include>
+    
+    <!-- start ArUco -->
+    <node name="aruco_tracker" pkg="aruco_ros" type="single">
+        <remap from="/camera_info" to="/l515_grip/color/camera_info" />
+        <remap from="/image" to="/l515_grip/color/image_raw" />
+        <param name="image_is_rectified" value="true"/>
+        <param name="marker_size" value="$(arg marker_size)"/>
+        <param name="marker_id" value="$(arg marker_id)"/>
+        <param name="reference_frame" value="l515_grip_color_optical_frame"/>
+        <param name="camera_frame" value="l515_grip_color_optical_frame"/>
+        <param name="marker_frame" value="camera_marker" />
+    </node>
+    
+    <!-- Load robot description & publish joints -->
+
+    <arg name="start_rviz" default="true" doc="if true, rviz will be started with the provided config file" />
+    <arg name="rviz_config_file" value="$(find amiga_sim)/config/rviz_easy_handeye.config" />
+    
+    <node if="$(arg start_rviz)" name="$(anon rviz)" pkg="rviz" type="rviz" respawn="true" args="-d $(arg rviz_config_file)" output="screen" />
+
+    <!-- start the calibration publish-->
+    <include file="$(find easy_handeye)/launch/publish.launch">
+        <arg name="eye_on_hand" value="true" />
+        <arg name="namespace_prefix" value="$(arg namespace_prefix)" />
+        <arg name="robot_effector_frame" value="amiga_arm_tool0" />
+    </include>
+
+</launch>
