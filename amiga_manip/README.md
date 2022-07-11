@@ -193,12 +193,6 @@ Approach and then move to the target
 
 ### circle executor 
 
-For example, pair up with circle detection to perform a simple stirring
-
-![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/bowl.gif)
-
-![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/mix.gif)
-
 Generate a circle with an adjustable radius and execute n times
  ```
 /amiga/offline_manipulation/circle_executor
@@ -209,10 +203,13 @@ Generate a circle with an adjustable radius and execute n times
 | `radius` | `float64` | radius of the circle |
 | `number` | `int32` | number of executions |
 
+For example, pair up with circle detection to perform a simple stirring
+
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/bowl.gif)
+
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/mix.gif)
 
 ### viewpoint adjuster
-
-![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/observe.gif)
 
 Generate a semi-sphere of viewpoints with adjustable sphere_layer, sphere_radius, longitude and latitude around a reference frame for the arm to reach so as to adjust viewpoints
  ```
@@ -226,6 +223,10 @@ Generate a semi-sphere of viewpoints with adjustable sphere_layer, sphere_radius
 | `param` | `float64` | spherical samling params |
 | `publish_tf` | `bool` | if publish tfs|
 | `execution` | `bool` | if execute|
+
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/observe2.gif)
+
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/observe.gif)
 
 
 
