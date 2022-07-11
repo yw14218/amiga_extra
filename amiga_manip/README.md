@@ -158,7 +158,7 @@ Return a geometry_msgs/Pose eef_pose
 
 return geometry_msgs/Pose eef_poses[] 
 
-## high-level services (made with low&mid levels)
+## high-level services (made with low&mid levels and APIs optimisable)
 
 ### grasp executor
 Given a pose in any frame, an intended grripper grasp type, and a desired approaching distance, plan a grasp accounting for gripper-arm offset.
@@ -177,6 +177,7 @@ Approach and then move to target
 
 
 ### circle executor
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/mix.gif)
 Generate a circle with adjustable radius and execute n times
  ```
 /amiga/offline_manipulation/circle_executor
@@ -189,7 +190,7 @@ Generate a circle with adjustable radius and execute n times
 
 
 ### viewpoint adjuster
-
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/observe.gif)
 Generate a semi-sphere of view points with adjustable sphere_layer, sphere_radius, longitude and latitude around a reference frame for the arm to reach so as to adjust viewpoints
  ```
 /amiga/offline_manipulation/view_point_adjuster
