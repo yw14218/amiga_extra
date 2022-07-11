@@ -4,9 +4,7 @@ A hierarchical manipulation server for Amiga based on MoveIt.
 
 ## Core concept
 
-* Complex manipulation tasks can be described as a combination of simpler ones. The purpose of this 
-server is to identify and provide several useful services to Amiga developers such that they can 
-concentrate on investigating how to use perception to generate a desired online trajectory and action plan.
+* Complex manipulation tasks can be described as a combination of simpler ones. The purpose of this server is to identify and provide several useful services to Amiga developers such that they can concentrate on investigating how to use perception to generate a desired online trajectory and action plan.
 
 * A single manipulation server is more organised, extensible and trackable than spamming scripts for each task.
 
@@ -79,7 +77,7 @@ example usage (go to a joint configuration):
 ```
 /amiga/offline_manipulation/plan_to_joint_goal -- joint0 joint1 joint2 joint3 joint4 joint5
 ```
-example usage (change in current joint configutation):
+example usage (change in current joint configuration):
 ```
 /amiga/offline_manipulation/plan_joints -- djoint0 djoint1 djoint2 djoint3 djoint4 djoint5
 ```
@@ -134,8 +132,10 @@ add a named cuboid shape obstacle to the collision scene
 
 ### virual-effector translator 
 
-the virtual effetor is assumed to be consisting of only a `translation` w.r.t eef
+the virtual effector is assumed to be consisting of only a `translation` w.r.t eef 
+
 vir pose &#8594; eef pose
+
 vir trajectory &#8594; eef trajectory
 
  ```
