@@ -4,11 +4,15 @@ A hierarchical manipulation server for Amiga based on MoveIt.
 
 ## Core concept
 
-* Complex manipulation tasks can be described as a combination of simpler ones. The purpose of this server is to identify and provide several useful services to Amiga developers such that they can concentrate on using perception to generate a desired online trajectory and action plan.
+* Complex manipulation tasks can be described as a combination of simpler ones. The purpose of this server 
+is to identify and provide several useful services to Amiga developers such that they can concentrate on 
+investigating how to use perception to generate a desired online trajectory and action plan.
 
 * A single manipulation server is more organised, extensible and trackable than spamming scripts for each task.
 
 * Services can be used in a script via proxies.
+
+* Compatible with Amiga simulation. Set the simulation argument to true if in use.
  
 ## low-level services 
 
@@ -43,21 +47,18 @@ rosservice call /amiga/offline_manipulation/plan_to_pose -- pose frame
 | `pose` | `geometry_msgs/Pose` | 6D pose |
 | `frame` | `string` | Frame of the pose |
 
-### plan in cartesian space xyz
+### plan xyz in cartesian space in the end-effector's frame
 plan_cartesian_xyz = rospy.Service('/amiga/offline_manipulation/plan_cartesian_xyz', PlanCartesian, self.plan_cartesian_xyz)
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
 | `x` | `float64` | changes in x |
 | `y` | `float64` | changes in y |
 | `z` | `float64` | changes in z |
+
 example usage (lift by 20cm):
 ```
-rosservice call /amiga/offline_manipulation/plan_to_pose -- 0.0 0.0 0.2
+rosservice call /amiga//amiga/offline_manipulation/plan_cartesian_xyz -- 0.0 0.0 0.2
 ```
-
-
-
-
 
 # plan to traverse waypoints
 plan_to_traverse = rospy.Service('/amiga/offline_manipulation/traverse_waypoints', TraverseWaypoints, self.plan_traversing_waypoints)
