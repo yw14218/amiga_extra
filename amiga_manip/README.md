@@ -7,14 +7,12 @@ A hierarchical manipulation server for Amiga based on MoveIt.
 * Complex manipulation tasks can be described as a combination of simpler ones. The purpose of this server is to identify and provide several useful services to Amiga developers such that they can concentrate on using perception to generate a desired online trajectory and action plan.
 
 * A single manipulation server is more organised, extensible and trackable than spamming scripts for each task.
+
+* Services can be used in a script via proxies.
  
 ## low-level services 
 
-### go to a pre-defined pose
-example:
-```
-rosservice call /amiga/offline_manipulation/go_to_grasp_home_pose
-```
+### go to a pre-defined pose (update in the SRDF file for more)
 
 ```
 /amiga/offline_manipulation/go_to_grasp_home_pose
@@ -24,10 +22,27 @@ rosservice call /amiga/offline_manipulation/go_to_grasp_home_pose
 /amiga/offline_manipulation/go_to_inspect1_pose
 /amiga/offline_manipulation/go_to_inspect2_pose
 ```
+usage:
+```
+rosservice call /amiga/offline_manipulation/go_to_grasp_home_pose
+```
 
 
-# plan to a given pose in a frame
-plan_to_pose_goal = rospy.Service('/amiga/offline_manipulation/plan_to_pose', PlanToPose, self.plan_to_pose_goal)
+### plan the end-effector to a given pose in a given frame
+```
+/amiga/offline_manipulation/plan_to_pose
+```
+usage:
+```
+rosservice call /amiga/offline_manipulation/plan_to_pose -- pose frame
+```
+
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `pose` | `geometry_msgs/Pose` | **Required**. Your Gophish API key |
+| `frame` | `string` | **Required**. Your Gophish API key |
+
 
 # plan to traverse waypoints
 plan_to_traverse = rospy.Service('/amiga/offline_manipulation/traverse_waypoints', TraverseWaypoints, self.plan_traversing_waypoints)
@@ -66,7 +81,3 @@ Alternatively, you may append the `api_key=[API_KEY]` as a GET parameter to auth
 ```http
 GET /api/campaigns/?api_key=12345678901234567890123456789012
 ```
-
-| Parameter | Type | Description |
-| :--- | :--- | :--- |
-| `api_key` | `string` | **Required**. Your Gophish API key |
