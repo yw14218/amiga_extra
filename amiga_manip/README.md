@@ -2,7 +2,7 @@
 
 A hierarchical manipulation server for Amiga based on MoveIt. 
 
-## Core concept
+## core concept
 
 * Complex manipulation tasks can be described as a combination of simpler ones. The purpose of this server is to identify and provide several useful services to Amiga developers such that they can concentrate on investigating how to use perception to generate a desired online trajectory and action plan.
 
@@ -158,17 +158,45 @@ return a geometry_msgs/Pose eef_pose
 
 return geometry_msgs/Pose eef_poses[] 
 
+## high-level services (made with low&mid levels)
+### grasp executor
 
 
+ ```
+/amiga/offline_manipulation/grasp_executor
+```
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `target_pose` | `geometry_msgs/Pose[]` | a 6D grasp pose |
+| `frame` | `geometry_msgs/Pose[]` | a 6D grasp pose |
+| `distance` | `geometry_msgs/Point` | an approach distance |
+| `gripper_type` | `geometry_msgs/Point` | gripper mode|
 
 
+ ```
+/amiga/offline_manipulation/circle_executor
+```
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `radius` | `float64` | radius of the circle |
+| `number` | `int32` | number of executions |
 
 
+ ```
+/amiga/offline_manipulation/view_point_adjuster
+```
 
-grasp_executor = rospy.Service('/amiga/offline_manipulation/grasp_executor', 
-    GraspExecutor, self._grasp_executor)
-view_point_adjuster = rospy.Service('/amiga/offline_manipulation/view_point_adjuster', ViewAdjust, self.adjust_viewpoints)
-circle_executor = rospy.Service('/amiga/offline_manipulation/circle_executor', CircleExecutor, self._circle_executor)
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `default` | `bool` | if use default param |
+| `frame` | `string` | the reference frame |
+| `param` | `float64` | spherical samling params |
+| `publish_tf` | `bool` | if publish tfs|
+| `execution` | `bool` | if execute|
+
+
 
 
 
