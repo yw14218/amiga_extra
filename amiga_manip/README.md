@@ -224,8 +224,6 @@ Generate a semi-sphere of viewpoints with adjustable sphere_layer, sphere_radius
 | `publish_tf` | `bool` | if publish tfs|
 | `execution` | `bool` | if execute|
 
-![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/observe2.gif)
-
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/observe.gif)
 
 
