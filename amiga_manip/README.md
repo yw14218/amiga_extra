@@ -101,7 +101,7 @@ rosservice call /amiga/offline_manipulation/traverse_waypoints poses
 ```
 /amiga/offline_manipulation/get_current_eef_pose
 ```
-return the current eef pose
+Return the current eef pose
 
 ```
 /amiga/offline_manipulation/publish_to_tf
@@ -132,7 +132,7 @@ add a named cuboid shape obstacle to the collision scene
 
 ### virual-effector translator 
 
-the virtual effector is assumed to be consisting of only a `translation` w.r.t eef 
+The virtual effector is assumed to be consisting of only a `translation` w.r.t eef 
 
 vir pose &#8594; eef pose
 
@@ -146,7 +146,7 @@ vir trajectory &#8594; eef trajectory
 | `vir_pose` | `geometry_msgs/Pose` | a 6D pose |
 | `translation_wrt_eef` | `geometry_msgs/Point` | translational transformation w.r.t. eef|
 
-return a geometry_msgs/Pose eef_pose
+Return a geometry_msgs/Pose eef_pose
 
  ```
 /amiga/offline_manipulation/virtual_effector_traj_translator
@@ -159,8 +159,10 @@ return a geometry_msgs/Pose eef_pose
 return geometry_msgs/Pose eef_poses[] 
 
 ## high-level services (made with low&mid levels)
-### grasp executor
 
+### grasp executor
+Given a pose in any frame, an intended grripper grasp type, and a desired approaching distance, plan a grasp accounting for gripper-arm offset.
+Approach and then move to target
 
  ```
 /amiga/offline_manipulation/grasp_executor
@@ -174,6 +176,8 @@ return geometry_msgs/Pose eef_poses[]
 | `gripper_type` | `geometry_msgs/Point` | gripper mode|
 
 
+### circle executor
+Generate a circle with adjustable radius and execute n times
  ```
 /amiga/offline_manipulation/circle_executor
 ```
@@ -184,6 +188,9 @@ return geometry_msgs/Pose eef_poses[]
 | `number` | `int32` | number of executions |
 
 
+### viewpoint adjuster
+
+Generate a semi-sphere of view points with adjustable sphere_layer, sphere_radius, longitude and latitude around a reference frame for the arm to reach so as to adjust viewpoints
  ```
 /amiga/offline_manipulation/view_point_adjuster
 ```
