@@ -178,7 +178,7 @@ Approach and then move to the target
 
 ### circle executor 
 For example, pair up with circle detection to perform a simple stirring
-![alt text](https://github.com/yw14218/amiga_extra/tree/main/amiga_manip/media)
+![Alt Text](https://github.com/yw14218/amiga_extra/tree/main/amiga_manip/media/7.png)
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/mix.gif)
 Generate a circle with an adjustable radius and execute n times
  ```
