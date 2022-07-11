@@ -190,6 +190,8 @@ Approach and then move to the target
 | `distance` | `geometry_msgs/Point` | an approach distance |
 | `gripper_type` | `geometry_msgs/Point` | gripper mode|
 
+![Alt Text](https://github.com/ap8718/Robots4Hospitals/blob/main/Archives/spatula.gif)
+
 
 ### circle executor 
 
@@ -225,6 +227,7 @@ Generate a semi-sphere of viewpoints with adjustable sphere_layer, sphere_radius
 | `execution` | `bool` | if execute|
 
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/observe.gif)
+
 
 
 
