@@ -47,7 +47,7 @@ rosservice call /amiga/offline_manipulation/plan_to_pose -- pose frame
 | `pose` | `geometry_msgs/Pose` | 6D pose |
 | `frame` | `string` | Frame of the pose |
 
-### plan xyz in cartesian space in the end-effector's frame
+### plan xyz in Cartesian space in the end-effector's frame
 plan_cartesian_xyz = rospy.Service('/amiga/offline_manipulation/plan_cartesian_xyz', PlanCartesian, self.plan_cartesian_xyz)
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
@@ -55,21 +55,64 @@ plan_cartesian_xyz = rospy.Service('/amiga/offline_manipulation/plan_cartesian_x
 | `y` | `float64` | changes in y |
 | `z` | `float64` | changes in z |
 
-example usage (lift by 20cm):
+example usage (go down by 20cm):
 ```
-rosservice call /amiga//amiga/offline_manipulation/plan_cartesian_xyz -- 0.0 0.0 0.2
+rosservice call /amiga//amiga/offline_manipulation/plan_cartesian_xyz -- 0.0 0.0 -0.2
 ```
 
-# plan to traverse waypoints
-plan_to_traverse = rospy.Service('/amiga/offline_manipulation/traverse_waypoints', TraverseWaypoints, self.plan_traversing_waypoints)
-
-
-
-
-# plan in joint configuration space
+### plan in joint configuration space
+```
 plan_joint_goal = rospy.Service('/amiga/offline_manipulation/plan_to_joint_goal', PlanJointGoal, self.plan_to_joint_goal)
 plan_joints = rospy.Service('/amiga/offline_manipulation/plan_joints', PlanJointGoal, self.plan_joints) 
- 
+```
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `joint0` | `float64` | (changes in) radian angle |
+| `joint1` | `float64` | (changes in) radian angle |
+| `joint2` | `float64` | (changes in) radian angle |
+| `joint3` | `float64` | (changes in) radian angle |
+| `joint4` | `float64` | (changes in) radian angle |
+| `joint5` | `float64` | (changes in) radian angle |
+
+example usage (go to a joint configuration):
+```
+/amiga/offline_manipulation/plan_to_joint_goal -- joint0 joint1 joint2 joint3 joint4 joint5
+```
+example usage (change in current joint configutation):
+```
+/amiga/offline_manipulation/plan_joints -- djoint0 djoint1 djoint2 djoint3 djoint4 djoint5
+```
+
+
+### plan to traverse waypoints with the end-effector
+```
+plan_to_traverse = rospy.Service('/amiga/offline_manipulation/traverse_waypoints', TraverseWaypoints, self.plan_traversing_waypoints)
+```
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `poses` | `geometry_msgs/Pose[]` | waypoints |
+
+example usage (use perception to generate some waypoints):
+```
+rosservice call /amiga/offline_manipulation/traverse_waypoints poses
+```
+
+### utils
+```
+/amiga/offline_manipulation/get_current_eef_pose
+```
+return the current eef pose
+
+```
+/amiga/offline_manipulation/publish_to_tf
+```
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `pose` | `geometry_msgs/Pose pose` | 6D transform |
+| `parent` | `string` | parent frame |
+| `child` | `string` | child frame |
  
  
  
@@ -85,13 +128,7 @@ grasp_executor = rospy.Service('/amiga/offline_manipulation/grasp_executor',
 
 
 
-# utils
-get_current_eef_pose = rospy.Service('/amiga/offline_manipulation/get_current_eef_pose', GetPose, self.get_current_pose)
-publish_to_tf = rospy.Service('/amiga/offline_manipulation/publish_to_tf', PublishTF, self.publish_to_tf)
-        
-To authenticate an API request, you should provide your API key in the `Authorization` header.
 
-Alternatively, you may append the `api_key=[API_KEY]` as a GET parameter to authorize yourself to the API. But note that this is likely to leave traces in things like your history, if accessing the API through a browser.
 
 ```http
 GET /api/campaigns/?api_key=12345678901234567890123456789012
