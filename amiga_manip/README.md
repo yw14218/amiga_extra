@@ -31,9 +31,11 @@ rosservice call /amiga/offline_manipulation/go_to_grasp_home_pose
 
 
 ### plan the end-effector to a given pose in a given frame (transformations performed automatically)
+
 ```
 /amiga/offline_manipulation/plan_to_pose
 ```
+
 example usage:
 ```
 rosservice call /amiga/offline_manipulation/plan_to_pose -- pose frame
@@ -46,7 +48,9 @@ rosservice call /amiga/offline_manipulation/plan_to_pose -- pose frame
 | `frame` | `string` | Frame of the pose |
 
 ### plan xyz in Cartesian space in the end-effector's frame
+
 plan_cartesian_xyz = rospy.Service('/amiga/offline_manipulation/plan_cartesian_xyz', PlanCartesian, self.plan_cartesian_xyz)
+
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
 | `x` | `float64` | changes in x |
@@ -59,6 +63,7 @@ rosservice call /amiga//amiga/offline_manipulation/plan_cartesian_xyz -- 0.0 0.0
 ```
 
 ### plan in joint configuration space
+
 ```
 plan_joint_goal = rospy.Service('/amiga/offline_manipulation/plan_to_joint_goal', PlanJointGoal, self.plan_to_joint_goal)
 plan_joints = rospy.Service('/amiga/offline_manipulation/plan_joints', PlanJointGoal, self.plan_joints) 
@@ -77,6 +82,7 @@ example usage (go to a joint configuration):
 ```
 /amiga/offline_manipulation/plan_to_joint_goal -- joint0 joint1 joint2 joint3 joint4 joint5
 ```
+
 example usage (change in current joint configuration):
 ```
 /amiga/offline_manipulation/plan_joints -- djoint0 djoint1 djoint2 djoint3 djoint4 djoint5
@@ -84,6 +90,7 @@ example usage (change in current joint configuration):
 
 
 ### plan to traverse waypoints with the end-effector
+
 ```
 plan_to_traverse = rospy.Service('/amiga/offline_manipulation/traverse_waypoints', TraverseWaypoints, self.plan_traversing_waypoints)
 ```
@@ -98,6 +105,7 @@ rosservice call /amiga/offline_manipulation/traverse_waypoints poses
 ```
 
 ### utils
+
 ```
 /amiga/offline_manipulation/get_current_eef_pose
 ```
@@ -106,6 +114,7 @@ Return the current eef pose
 ```
 /amiga/offline_manipulation/publish_to_tf
 ```
+
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
 | `pose` | `geometry_msgs/Pose pose` | 6D transform |
@@ -115,10 +124,13 @@ publish a tf transform (i.e. for visualisation)
  
  
 ## mid-level services 
+
 ### collisions
+
  ```
 /amiga/offline_manipulation/add_to_collision_scene
 ```
+
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
 | `name` | `string` | name of the obstacle |
@@ -128,6 +140,7 @@ publish a tf transform (i.e. for visualisation)
 | `dx` | `float64` | length of x |
 | `dy` | `float64` | length of y |
 | `dz` | `float64` | length of z |
+
 add a named cuboid shape obstacle to the collision scene
 
 ### virual-effector translator 
@@ -151,6 +164,7 @@ Return a geometry_msgs/Pose eef_pose
  ```
 /amiga/offline_manipulation/virtual_effector_traj_translator
 ```
+
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
 | `vir_poses` | `geometry_msgs/Pose[]` | a 6D pose |
@@ -161,6 +175,7 @@ return geometry_msgs/Pose eef_poses[]
 ## high-level services (made with low&mid levels and APIs optimisable)
 
 ### grasp executor
+
 Given a pose in any frame, an intended gripper grasp type, and the desired approaching distance, plan a grasp accounting for gripper-arm offset.
 Approach and then move to the target
 
@@ -177,9 +192,13 @@ Approach and then move to the target
 
 
 ### circle executor 
+
 For example, pair up with circle detection to perform a simple stirring
+
 ![Alt Text](https://github.com/yw14218/amiga_extra/tree/main/amiga_manip/media/7.png)
+
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/mix.gif)
+
 Generate a circle with an adjustable radius and execute n times
  ```
 /amiga/offline_manipulation/circle_executor
@@ -192,7 +211,9 @@ Generate a circle with an adjustable radius and execute n times
 
 
 ### viewpoint adjuster
+
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/observe.gif)
+
 Generate a semi-sphere of viewpoints with adjustable sphere_layer, sphere_radius, longitude and latitude around a reference frame for the arm to reach so as to adjust viewpoints
  ```
 /amiga/offline_manipulation/view_point_adjuster
