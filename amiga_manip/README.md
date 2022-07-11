@@ -22,17 +22,17 @@ A hierarchical manipulation server for Amiga based on MoveIt.
 /amiga/offline_manipulation/go_to_inspect1_pose
 /amiga/offline_manipulation/go_to_inspect2_pose
 ```
-usage:
+example usage:
 ```
 rosservice call /amiga/offline_manipulation/go_to_grasp_home_pose
 ```
 
 
-### plan the end-effector to a given pose in a given frame
+### plan the end-effector to a given pose in a given frame (transformations performed automatically)
 ```
 /amiga/offline_manipulation/plan_to_pose
 ```
-usage:
+example usage:
 ```
 rosservice call /amiga/offline_manipulation/plan_to_pose -- pose frame
 ```
@@ -40,15 +40,29 @@ rosservice call /amiga/offline_manipulation/plan_to_pose -- pose frame
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| `pose` | `geometry_msgs/Pose` | **Required**. Your Gophish API key |
-| `frame` | `string` | **Required**. Your Gophish API key |
+| `pose` | `geometry_msgs/Pose` | 6D pose |
+| `frame` | `string` | Frame of the pose |
+
+### plan in cartesian space xyz
+plan_cartesian_xyz = rospy.Service('/amiga/offline_manipulation/plan_cartesian_xyz', PlanCartesian, self.plan_cartesian_xyz)
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `x` | `float64` | changes in x |
+| `y` | `float64` | changes in y |
+| `z` | `float64` | changes in z |
+example usage (lift by 20cm):
+```
+rosservice call /amiga/offline_manipulation/plan_to_pose -- 0.0 0.0 0.2
+```
+
+
+
 
 
 # plan to traverse waypoints
 plan_to_traverse = rospy.Service('/amiga/offline_manipulation/traverse_waypoints', TraverseWaypoints, self.plan_traversing_waypoints)
 
-# plan in cartesian space xyz
-plan_cartesian_xyz = rospy.Service('/amiga/offline_manipulation/plan_cartesian_xyz', PlanCartesian, self.plan_cartesian_xyz)
+
 
 
 # plan in joint configuration space
