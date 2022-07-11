@@ -4,12 +4,12 @@ A hierarchical manipulation server for Amiga based on MoveIt.
 
 ## Core concept
 
-Complex manipulation tasks can be described as a combination of simpler ones. The purpose of this server is to identify and provide some useful services to Amiga developers such that they can concentrate on using perception to generate a desired online trajectory and action plan.
+Complex manipulation tasks can be described as a combination of simpler ones. The purpose of this server is to identify and provide several useful services to Amiga developers such that they can concentrate on using perception to generate a desired online trajectory and action plan.
 
  A single manipulation server is more organized, extensible and trackable than spamming scripts for each task.
 
 
-All API requests require the use of a generated API key. You can find your API key, or generate a new one, by navigating to the /settings endpoint, or clicking the “Settings” sidebar item.
+
 
 view_point_adjuster = rospy.Service('/amiga/offline_manipulation/view_point_adjuster', ViewAdjust, self.adjust_viewpoints)
 circle_executor = rospy.Service('/amiga/offline_manipulation/circle_executor', CircleExecutor, self._circle_executor)
