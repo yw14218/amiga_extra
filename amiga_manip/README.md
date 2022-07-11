@@ -195,7 +195,7 @@ Approach and then move to the target
 
 For example, pair up with circle detection to perform a simple stirring
 
-[![Product Name Screen Shot][product-screenshot]](https://github.com/yw14218/amiga_extra/tree/main/amiga_manip/media/7.png)
+![This is an image](https://github.com/yw14218/amiga_extra/tree/main/amiga_manip/media/7.png)
 
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/mix.gif)
 
