@@ -1,20 +1,16 @@
 from copy import deepcopy
-from gazebo_msgs.srv import GetModelState, SetModelState
-from gazebo_msgs.msg import ModelState
 from geometry_msgs.msg import Pose, Point, Quaternion
 from std_srvs.srv import Empty
 from amiga_manip.srv import PlanCartesian, PlanToPose, PlanJointGoal, TraverseWaypoints, GetPose, GraspExecutor
+from math import pi, sin, cos
 import rospy
 import time
+import numpy as np
 
 
-class SimpleGraspPipeline():
-    """
-    In this type of grasp we get the intended object's pose from Gazebo directly, 
-    there is no object detection Currently only support grasping from top
-    """
+class Pipeline():
+
     def __init__(self) -> None:
-        super(SimpleGraspPipeline, self).__init__()
         self.object = None
 
         self.go_to_grasp_home_srv = rospy.ServiceProxy("/amiga/offline_manipulation/go_to_grasp_home_pose", Empty)
@@ -50,16 +46,31 @@ class SimpleGraspPipeline():
         time.sleep(0.1)
         
     def manip(self):
-        pose_list = []
         get_pose = self.get_eef_pose.call()
         pose_now = get_pose.pose
-        pose_now.position.y += 0.4
-        pose_list.append(deepcopy(pose_now))
-        pose_now.position.y -= 0.8
-        pose_list.append(deepcopy(pose_now))
-
-        self.traverse_waypoints.call(pose_list)
-
+        cx = pose_now.position.x
+        cy = pose_now.position.y
+        print(cx, cy)
+        r = 0.05
+        wpoints = []
+        for theta in np.arange(0, 2*pi, 0.01):
+            x = cx + r*cos(theta)
+            y = cy + r*sin(theta)
+            pose_now.position.x = x
+            pose_now.position.y = y
+            wpoints.append(deepcopy(pose_now))
+            print(x,y)
+        print(len(wpoints))
+        
+        self.traverse_waypoints(wpoints)
+        self.traverse_waypoints(wpoints)
+        self.traverse_waypoints(wpoints)
+        self.traverse_waypoints(wpoints)
+        self.traverse_waypoints(wpoints)
+        self.traverse_waypoints(wpoints)
+        self.traverse_waypoints(wpoints)
+        
+        
     @staticmethod
     def transform_pose_to_top_pick(pose : Pose()) -> Pose:
         """
@@ -75,19 +86,13 @@ class SimpleGraspPipeline():
 if __name__ == "__main__":
 
     rospy.init_node("simple_grasp_sim", anonymous=True)
-    get_pose_srv = rospy.ServiceProxy("/gazebo/get_model_state", GetModelState)
-    pipeline = SimpleGraspPipeline()
-    pipeline.set_grasp_object('beer')
-    object_pose = get_pose_srv.call(pipeline.object, "robot").pose
-    print(object_pose)
-    # go home
-    pipeline.grasp(object_pose)
-
-    # go up
-    pipeline.plan_cartesian_srv.call(0.0, 0.0, 0.6)
+    pipeline = Pipeline()
+    # distance = 0.55
+    pipeline.manip()
     
-    #pipeline.go_to_home_srv.call()
-    # manip
-    #pipeline.manip()
-
     rospy.spin()
+    
+    	 
+
+
+    

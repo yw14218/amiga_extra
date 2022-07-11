@@ -69,6 +69,7 @@ find_package(catkin REQUIRED COMPONENTS
    VirTransPose.srv
    VirTransTraj.srv
    GraspExecutor.srv
+   CircleExecutor.srv
  )
 
 ## Generate actions in the 'action' folder

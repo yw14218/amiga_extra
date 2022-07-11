@@ -10,7 +10,7 @@ from copy import deepcopy
 from math import pi, cos , sin
 from geometry_msgs.msg import Pose, Vector3, TransformStamped, Quaternion, PoseStamped
 from typing import Union, List, Tuple, Optional
-from tf.transformations import euler_from_quaternion, quaternion_from_euler, quaternion_matrix
+from tf.transformations import quaternion_from_euler, quaternion_matrix
 from std_srvs.srv import Empty, EmptyResponse
 import tf2_geometry_msgs
 from amiga_manip.srv import (PlanCartesian, PlanToPose, PlanCartesianResponse, 
@@ -18,7 +18,7 @@ from amiga_manip.srv import (PlanCartesian, PlanToPose, PlanCartesianResponse,
     GetPose, GetPoseResponse, TraverseWaypoints, TraverseWaypointsResponse,
     ViewAdjust, ViewAdjustResponse, AddCollision, AddCollisionResponse,
     VirTransPose, VirTransPoseResponse, VirTransTraj, VirTransTrajResponse,
-    GraspExecutor, GraspExecutorResponse)
+    GraspExecutor, GraspExecutorResponse, CircleExecutor, CircleExecutorResponse)
 
 class AmigaManipulationServer(object):
     """
@@ -57,6 +57,7 @@ class AmigaManipulationServer(object):
         
         # higher-level
         view_point_adjuster = rospy.Service('/amiga/offline_manipulation/view_point_adjuster', ViewAdjust, self.adjust_viewpoints)
+        circle_executor = rospy.Service('/amiga/offline_manipulation/circle_executor', CircleExecutor, self._circle_executor)
         add_to_collision_scene = rospy.Service('/amiga/offline_manipulation/add_to_collision_scene', AddCollision, self.add_to_collision_scene)
         virtual_effector_pose_translator = rospy.Service('/amiga/offline_manipulation/virtual_effector_pose_translator', 
             VirTransPose, self._virtual_effect_translate_pose)
@@ -523,7 +524,31 @@ class AmigaManipulationServer(object):
         self.grasp_executor(req.target_pose, req.frame, req.distance, req.gripper_type)
 
         return GraspExecutorResponse()
+
+    def _circle_executor(self, req):
+        pose_now = self.arm_group.get_current_pose().pose
+        cx = pose_now.position.x
+        cy = pose_now.position.y
+        wpoints = []
+        for theta in np.arange(0, 2*pi, 0.01):
+            x = cx + req.radius*cos(theta)
+            y = cy + req.radius*sin(theta)
+            pose_now.position.x = x
+            pose_now.position.y = y
+            wpoints.append(deepcopy(pose_now))
+
+        for i in range (req.number):
+            (plan, fraction) = self.arm_group.compute_cartesian_path(
+                                        wpoints,   # waypoints to follow
+                                        0.01,        # eef_step
+                                        0.0)         #
+            plan.joint_trajectory.header.frame_id="base_link"
         
+            self.arm_group.execute(plan, wait=True)
+            self.arm_group.clear_pose_targets()
+            
+        return CircleExecutorResponse()
+
 if __name__ == "__main__":
     rospy.init_node("amiga_manipulation_server", anonymous=True)
     manipulation_server = AmigaManipulationServer()
