@@ -4,13 +4,13 @@ A hierarchical manipulation server for Amiga based on MoveIt.
 
 ## Core concept
 
-* Complex manipulation tasks can be described as a combination of simpler ones. The purpose of this server 
-is to identify and provide several useful services to Amiga developers such that they can concentrate on 
-investigating how to use perception to generate a desired online trajectory and action plan.
+* Complex manipulation tasks can be described as a combination of simpler ones. The purpose of this 
+server is to identify and provide several useful services to Amiga developers such that they can 
+concentrate on investigating how to use perception to generate a desired online trajectory and action plan.
 
 * A single manipulation server is more organised, extensible and trackable than spamming scripts for each task.
 
-* Services can be used in a script via proxies.
+* Services can be used in a script via proxies. Some examples can be found in the `scripts` folder
 
 * Compatible with Amiga simulation. Set the simulation argument to true if in use.
  
@@ -113,23 +113,65 @@ return the current eef pose
 | `pose` | `geometry_msgs/Pose pose` | 6D transform |
 | `parent` | `string` | parent frame |
 | `child` | `string` | child frame |
+publish a tf transform (i.e. for visualisation)
  
  
- 
-view_point_adjuster = rospy.Service('/amiga/offline_manipulation/view_point_adjuster', ViewAdjust, self.adjust_viewpoints)
-circle_executor = rospy.Service('/amiga/offline_manipulation/circle_executor', CircleExecutor, self._circle_executor)
-add_to_collision_scene = rospy.Service('/amiga/offline_manipulation/add_to_collision_scene', AddCollision, self.add_to_collision_scene)
-virtual_effector_pose_translator = rospy.Service('/amiga/offline_manipulation/virtual_effector_pose_translator', 
-    VirTransPose, self._virtual_effect_translate_pose)
-virtual_effector_traj_translator = rospy.Service('/amiga/offline_manipulation/virtual_effector_traj_translator', 
-    VirTransTraj, self._virtual_effect_translate_traj)
+## mid-level services 
+### collisions
+ ```
+/amiga/offline_manipulation/add_to_collision_scene
+```
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `name` | `string` | name of the obstacle |
+| `cx` | `float64` | centre of x |
+| `cy` | `float64` | centre of y |
+| `cz` | `float64` | centre of z |
+| `dx` | `float64` | length of x |
+| `dy` | `float64` | length of y |
+| `dz` | `float64` | length of z |
+add a named cuboid shape obstacle to the collision scene
+
+### virual-effector translator 
+
+the virtual effetor is assumed to be consisting of only a `translation` w.r.t eef
+vir pose &#8594; eef pose
+vir trajectory &#8594; eef trajectory
+
+ ```
+/amiga/offline_manipulation/virtual_effector_pose_translator
+```
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `vir_pose` | `geometry_msgs/Pose` | a 6D pose |
+| `translation_wrt_eef` | `geometry_msgs/Point` | translational transformation w.r.t. eef|
+
+return a geometry_msgs/Pose eef_pose
+
+ ```
+/amiga/offline_manipulation/virtual_effector_traj_translator
+```
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| `vir_poses` | `geometry_msgs/Pose[]` | a 6D pose |
+| `translation_wrt_eef` | `geometry_msgs/Point` | translational transformation w.r.t. eef|
+
+return geometry_msgs/Pose eef_poses[] 
+
+
+
+
+
+
+
+
 grasp_executor = rospy.Service('/amiga/offline_manipulation/grasp_executor', 
     GraspExecutor, self._grasp_executor)
+view_point_adjuster = rospy.Service('/amiga/offline_manipulation/view_point_adjuster', ViewAdjust, self.adjust_viewpoints)
+circle_executor = rospy.Service('/amiga/offline_manipulation/circle_executor', CircleExecutor, self._circle_executor)
 
 
 
 
 
-```http
-GET /api/campaigns/?api_key=12345678901234567890123456789012
-```
+
