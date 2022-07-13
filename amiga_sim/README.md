@@ -26,5 +26,7 @@ roslaunch amiga_sim grasp_sim.launch
 Please see `launch/grasp_sim.launch` for how to switching amongst different world
 Please see [husky_navigation](http://wiki.ros.org/husky_navigation/Tutorials/Husky%20AMCL%20Demo) for how to use navigation
 
-
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_sim/media/kitchen_sim.png)
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_sim/media/grasp_place_sim.gif)
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_sim/media/pour_sim.gif)
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_sim/media/pick_handle.gif)
