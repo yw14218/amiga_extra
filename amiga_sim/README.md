@@ -27,6 +27,12 @@ Please see `launch/grasp_sim.launch` for how to switching amongst different worl
 Please see [husky_navigation](http://wiki.ros.org/husky_navigation/Tutorials/Husky%20AMCL%20Demo) for how to use navigation
 
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_sim/media/kitchen_sim.png)
+
+## grasp & place
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_sim/media/grasp_place_sim.gif)
+
+## grasp & pour
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_sim/media/pour_sim.gif)
+
+## grasp & deliver
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_sim/media/pick_handle.gif)
