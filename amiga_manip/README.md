@@ -190,6 +190,7 @@ Approach and then move to the target
 | `distance` | `geometry_msgs/Point` | an approach distance |
 | `gripper_type` | `geometry_msgs/Point` | gripper mode|
 
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/grasp_executor.gif)
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/spatula.gif)
 
 
