@@ -99,6 +99,10 @@ class AmigaManipulationServer(object):
             close_gripper = rospy.Service('/amiga/offline_manipulation/simulation/close_gripper', Empty, self.set_gripper_close_pose)
             open_gripper = rospy.Service('/amiga/offline_manipulation/simulation/open_gripper', Empty, self.set_gripper_open_pose)
 
+    @staticmethod
+    def pose_to_list(pose):
+        return [pose.position.x, pose.position.y, pose.position.z, pose.orientation.x, pose.orientation.y, pose.orientation.z, pose.orientation.w]
+
     def display_trajectory(self, plan):
         display_trajectory = moveit_msgs.msg.DisplayTrajectory()
         display_trajectory.trajectory_start = self.robot.get_current_state()
@@ -506,11 +510,13 @@ class AmigaManipulationServer(object):
         """
 
         if gripper_type == "basic":
-            eef_pose = self.vitual_effect_translate_pose(target_pose, [0.0, 0.0, 0.30])
-            approach_pose = self.vitual_effect_translate_pose(target_pose, [0.0, 0.0, 0.30 + distance])
+            eef_pose_baselink = self.transform_pose(target_pose, from_frame=frame, to_frame='base_link')
 
-            eef_pose_baselink = self.transform_pose(eef_pose, from_frame=frame, to_frame='base_link')
-            approach_pose_baselink = self.transform_pose(approach_pose, from_frame=frame, to_frame='base_link')
+            eef_pose_baselink = self.vitual_effect_translate_pose(target_pose, [0.0, 0.0, 0.20])
+            self.static_tf_broadcast("base_link", "grasp_pose", self.pose_to_list(eef_pose_baselink))
+            
+            approach_pose_baselink = self.vitual_effect_translate_pose(target_pose, [0.0, 0.0, 0.20 + distance])
+            self.static_tf_broadcast("base_link", "approach_pose", self.pose_to_list(approach_pose_baselink))
 
             waypoints = []
             waypoints.append(approach_pose_baselink)
@@ -519,6 +525,7 @@ class AmigaManipulationServer(object):
 
             self.plan_pose_goal(pose = approach_pose_baselink)
             self.plan_pose_goal(pose = eef_pose_baselink)
+            
         
     def _grasp_executor(self, req):
         self.grasp_executor(req.target_pose, req.frame, req.distance, req.gripper_type)
