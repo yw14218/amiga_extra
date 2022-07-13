@@ -179,6 +179,8 @@ return geometry_msgs/Pose eef_poses[]
 Given a pose in any frame, an intended gripper grasp type, and the desired approaching distance, plan a grasp accounting for gripper-arm offset.
 Approach and then move to the target
 
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/grasp_executor.png)
+
  ```
 /amiga/offline_manipulation/grasp_executor
 ```
@@ -190,7 +192,6 @@ Approach and then move to the target
 | `distance` | `geometry_msgs/Point` | an approach distance |
 | `gripper_type` | `geometry_msgs/Point` | gripper mode|
 
-![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/grasp_executor.gif)
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/spatula.gif)
 
 
