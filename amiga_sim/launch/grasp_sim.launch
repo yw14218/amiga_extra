@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find amiga_sim)/launch/gazebo_basic.launch" />  
+  <node pkg="gazebo_grasp_plugin_ros" type="grasp_event_republisher" name="grasp_event_republishe" />
+  
+  <!--include file="$(find darknet_ros)/launch/darknet_ros.launch" /-->  
+  <!--node pkg="amiga_manipulation" type="grasp_sim.py" name="grasp_sim" /-->
+    
+</launch>
