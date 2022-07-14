@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Image data collection -->
+  <arg name="color_img_topic" value="/zed2_node/rgb/image_rect_color" doc="topic name for raw color image"/>
+  <arg name="depth_img_topic" value="/zed2_node/depth/depth_registered" doc="topic name for raw depth image"/>
+  <arg name="image_dir" value="$(find amiga_manipulation)/data/images/zed/" doc="directory to save images"/>
+
+  <node name="process_image_server" pkg="moveit_task_constructor_dexnet" type="process_image_server" output="screen">
+    <param name="color_img_topic" value="$(arg color_img_topic)"/>
+    <param name="depth_img_topic" value="$(arg depth_img_topic)"/>
+    <param name="image_dir" value="$(arg image_dir)"/>
+  </node>
+  
+</launch>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Point cloud data collection -->
+  <arg name="cartesian_limits" default="true" doc="specify cartesian limits on cloud in frame of optical link"/>
+  <arg name="remove_table" default="true" doc="segment table plane from object"/>
+  <arg name="xyz_lower_limits" default="[-10000, -10000, 0.25]" doc="lower x,y,z cartesian limits on cloud"/>
+  <arg name="xyz_upper_limits" default="[10000, 10000, 1.00]" doc="upper x,y,z cartesian limits on cloud"/>
+
+  <arg name="point_cloud_topic" value="/pointcloud" doc="point cloud topic name"/>
+  <arg name="cloud_dir" value="" doc="directory to point clouds"/>
+
+  <!-- Point cloud data collection -->
+  <node name="point_cloud_server" pkg="moveit_task_constructor_gpd" type="point_cloud_server" output="screen">
+    <param name="cartesian_limits" value="$(arg cartesian_limits)"/>
+    <rosparam param="xyz_lower_limits" subst_value="true">$(arg xyz_lower_limits)</rosparam>
+    <rosparam param="xyz_upper_limits" subst_value="true">$(arg xyz_upper_limits)</rosparam>
+    <param name="point_cloud_topic" value="$(arg point_cloud_topic)"/>
+    <param name="cloud_dir" value="$(arg cloud_dir)"/>
+    <param name="remove_table" value="$(arg remove_table)"/>
+  </node>
+  
+</launch>
