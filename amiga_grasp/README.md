@@ -1,4 +1,4 @@
-# amiga_manip
+# amiga_grasp
 
 A grasp generator package based on object detection, grasp pose detection and dex-net.
 
@@ -78,10 +78,16 @@ The communication is via looking up images in the data/tmp folder and using nump
 The idea is to use only 1D rotation from dex-net's inference result (the original one is 6D grasp pose)
 
 ## Demos
-
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_grasp/media/3.png)
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_grasp/media/papercup.gif)
+
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_grasp/media/4.png)
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_grasp/media/teaspoon.gif)
+
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_grasp/media/1.png)
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_grasp/media/grasp_pour_teaspoon.gif)
+
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_grasp/media/2.png)
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_grasp/media/scissor.gif)
 
 
