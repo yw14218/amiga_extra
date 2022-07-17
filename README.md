@@ -23,4 +23,4 @@ A grasp generator package based on object detection, grasp pose detection and de
 
 ## amiga_manipulaiton
 
-Workspace containing some legacy uncleaned code.
+Workspace containing some legacy uncleaned code and utility scripts.
