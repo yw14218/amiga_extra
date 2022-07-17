@@ -1,5 +1,9 @@
 # amiga_extra
 
+Amiga extra ROS packages aside of the main (repo) [https://github.com/NicoLingg/ur10e_robotiq/tree/noetic]
+
+# contents
+
 ## amiga_sim
 
 A simulation toolbox for Amiga based on Gazebo.
