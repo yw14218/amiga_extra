@@ -1,6 +1,6 @@
 # amiga_extra
 
-Amiga extra ROS packages aside of the main (repo) [https://github.com/NicoLingg/ur10e_robotiq/tree/noetic]
+Amiga extra ROS packages aside of the [main repo](https://github.com/NicoLingg/ur10e_robotiq/tree/noetic)
 
 # contents
 
