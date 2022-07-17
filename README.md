@@ -10,8 +10,12 @@ A hierarchical manipulation server for Amiga based on MoveIt.
 
 ## amiga_obstacle_avoid
 
-A C++ node used to extract/remove ALL planes in a given point cloud based on pcl library
+A C++ node used to extract/remove ALL planes in a given point cloud based on pcl library.
 
 ## amiga_grasp
 
 A grasp generator package based on object detection, grasp pose detection and dex-net.
+
+## amiga_manipulaiton
+
+Workspace containing some legacy uncleaned code.
