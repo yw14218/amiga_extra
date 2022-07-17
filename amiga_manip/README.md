@@ -213,6 +213,12 @@ For example, pair up with circle detection to perform a simple stirring
 
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/mix.gif)
 
+### spiral executor
+
+Not made a service yet but found in `scripts/spiral.py`
+
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/spiral.gif)
+
 ### viewpoint adjuster
 
 Generate a semi-sphere of viewpoints with adjustable sphere_layer, sphere_radius, longitude and latitude around a reference frame for the arm to reach so as to adjust viewpoints
