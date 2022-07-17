@@ -7,3 +7,7 @@ A simulation toolbox for Amiga based on Gazebo.
 ## amiga_manip
 
 A hierarchical manipulation server for Amiga based on MoveIt. 
+
+## amiga_plane fitter
+
+A C++ node used to extract/remove ALL planes in a given point cloud based on pcl library
