@@ -46,35 +46,10 @@ class Pipeline():
         time.sleep(0.1)
         
     def manip(self):
-        get_pose = self.get_eef_pose.call()
-        pose_now = get_pose.pose
-        cx = pose_now.position.x
-        cy = pose_now.position.y
-        print(cx, cy)
-        r = 0.05
-        t = 3000
-        amount = 360
-        wpoints = []
+        self.plan_cartesian_srv.call(0.0, 0.0, -0.3)
+        self.plan_cartesian_srv.call(0.0, 0.3, 0.0)
+        self.plan_cartesian_srv.call(0.0, -0.5, 0.0)
 
-        r = np.linspace(0, r, amount)
-        t = np.linspace(0, t, amount)
-        print(t)
-        
-        for i, j in zip(r, t):
-            if i == 0:
-                continue
-            x = i*cos(np.radians(j))
-            y = i*sin(np.radians(j))
-            pose_now.position.x += x
-            pose_now.position.y += y
-            wpoints.append(deepcopy(pose_now))           
-        self.traverse_waypoints(wpoints)
-        self.traverse_waypoints(wpoints)
-        self.traverse_waypoints(wpoints)
-        self.traverse_waypoints(wpoints)
-        self.traverse_waypoints(wpoints)
-        # self.traverse_waypoints(wpoints)
-        # self.traverse_waypoints(wpoints)
         
         
     @staticmethod

@@ -470,7 +470,7 @@ class AmigaManipulationServer(object):
         r33 = quaternion_matrix([q.x, q.y, q.z, q.w])
         r33 = np.delete(r33, 3, 0)
         r33 = np.delete(r33, 3, 1)
-        dxdydz = np.dot(r33, np.array([tr[0], tr[1], tr[2]]))
+        dxdydz = np.dot(r33, np.array([tr.x, tr.y, tr.z]))
         x, y, z = vir_pose.position.x, vir_pose.position.y, vir_pose.position.z
         _x = x - dxdydz[0]
         _y = y - dxdydz[1]
@@ -496,7 +496,7 @@ class AmigaManipulationServer(object):
         eef_traj = []
         for pose in req.vir_poses:
             eef_pose = self.vitual_effect_translate_pose(pose, req.translation_wrt_eef)
-            eef_traj.append(eef_traj)
+            eef_traj.append(eef_pose)
 
         return VirTransTrajResponse(eef_traj)
 
