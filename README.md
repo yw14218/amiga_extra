@@ -3,7 +3,7 @@
 Amiga extra ROS packages aside of the [main repo](https://github.com/NicoLingg/ur10e_robotiq/tree/noetic)
 
 # contents
-Each package contains a more detailed README.md
+Each package contains a more detailed README.md ⭐
 
 ## amiga_sim
 
