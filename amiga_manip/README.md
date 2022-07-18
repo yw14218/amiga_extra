@@ -239,8 +239,12 @@ Generate a semi-sphere of viewpoints with adjustable sphere_layer, sphere_radius
 
 ![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/observe.gif)
 
+### pouring (not made a service yet)
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/pour_bottle.gif)
 
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/pour_teaspoon.gif)
 
+![Alt Text](https://github.com/yw14218/amiga_extra/blob/main/amiga_manip/media/mv_pour2.gif)
 
 
 
